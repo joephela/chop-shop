@@ -67,7 +67,7 @@ function App() {
         data-testid="hero-image"
       >
         <img
-          src="/hero.png"
+          src={`${import.meta.env.BASE_URL}hero.png`}
           alt="chop shop hero"
           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
         />
