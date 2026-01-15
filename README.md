@@ -2,6 +2,8 @@
 
 > A premium monorepo for elite UI components and experiments.
 
+[**Live Demo**](https://joephela.github.io/chop-shop/)
+
 ![Chop Shop Hero](./assets/hero.png)
 
 ## Overview

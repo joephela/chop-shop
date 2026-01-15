@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "dev": "npm run dev -w apps/playground",
+    "build": "npm run build -w apps/playground",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
