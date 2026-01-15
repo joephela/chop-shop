@@ -3,7 +3,6 @@ import React, {
   useRef,
   useLayoutEffect,
   type ReactElement,
-  Fragment,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { FiPlus, FiX } from 'react-icons/fi';
@@ -194,43 +193,29 @@ export const RadialButton: React.FC<RadialButtonProps> = ({
             const isActive = activeLabel === action.label;
 
             return (
-              <Fragment key={action.label}>
-                {/* Individual Label below button */}
-                <div
-                  className={`absolute  pointer-events-none transition-all duration-300 z-50 flex justify-center ${
-                    isActive ? 'opacity-100' : 'opacity-0'
-                  }`}
-                >
-                  <span
-                    className={`p-1 rounded-md text-[10px] font-bold whitespace-nowrap ${THEMES[theme].bg} ${THEMES[theme].border} border text-white shadow-lg`}
-                  >
-                    {action.label}
-                  </span>
+              <IconButton
+                ref={isLast ? lastActionRef : null}
+                theme={theme}
+                onClick={() => {
+                  action.onClick();
+                  setExpanded(false);
+                }}
+                onMouseEnter={() => setActiveLabel(action.label)}
+                onMouseLeave={() => setActiveLabel(null)}
+                onFocus={() => setActiveLabel(action.label)}
+                onBlur={() => setActiveLabel(null)}
+                aria-label={action.label}
+                key={action.label}
+                title={action.label}
+                className="absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
+                style={{
+                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  {action.icon} {isActive && action.label}
                 </div>
-
-                <IconButton
-                  ref={isLast ? lastActionRef : null}
-                  theme={theme}
-                  onClick={() => {
-                    action.onClick();
-                    setExpanded(false);
-                  }}
-                  onMouseEnter={() => setActiveLabel(action.label)}
-                  onMouseLeave={() => setActiveLabel(null)}
-                  onFocus={() => setActiveLabel(action.label)}
-                  onBlur={() => setActiveLabel(null)}
-                  aria-label={action.label}
-                  title={action.label}
-                  className="absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
-                  style={{
-                    transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    {action.icon} {isActive && action.label}
-                  </div>
-                </IconButton>
-              </Fragment>
+              </IconButton>
             );
           })}
         </div>
