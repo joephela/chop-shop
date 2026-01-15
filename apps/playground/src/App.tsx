@@ -38,7 +38,7 @@ function App() {
     <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
       <header className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
-          Chop Shop Monorepo Playground
+          Chop Shop Playground
         </h1>
 
         <div className="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
@@ -62,12 +62,16 @@ function App() {
         </div>
       </header>
 
-      <div className="flex justify-center mb-8 rounded-4xl overflow-hidden">
+      <div
+        className="relative w-full max-w-6xl mx-auto mb-12 h-48 md:h-[400px] rounded-4xl overflow-hidden shadow-2xl border-4 border-white/50 dark:border-gray-800/50 group"
+        data-testid="hero-image"
+      >
         <img
           src="/hero.png"
           alt="chop shop hero"
-          className="w-full h-auto object-cover"
+          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Center */}
@@ -96,7 +100,9 @@ function App() {
           <code className="flex p-2 border border-gray-200 rounded bg-gray-900 text-green-400">
             {`<RadialButton label="Center" actions={actions} theme="${theme}" />`}
           </code>
-          <div className="p-2">
+          <div className="p-2 flex gap-1 justify-between">
+            <RadialButton label="Center" actions={actions} theme={theme} />
+            <RadialButton label="Center" actions={actions} theme={theme} />
             <RadialButton label="Center" actions={actions} theme={theme} />
           </div>
         </section>
