@@ -3,6 +3,9 @@ import { RadialButton, IconButton, type RadialTheme } from '@chop-shop/buttons';
 import { FiHome, FiSearch, FiSettings, FiUser, FiBell } from 'react-icons/fi';
 import './App.css';
 
+const codeBlockStyles =
+  'block p-4 border border-gray-200 rounded-xl bg-gray-950 text-green-400 overflow-x-auto text-sm leading-relaxed';
+
 function App() {
   const [theme, setTheme] = useState<RadialTheme>('berry');
 
@@ -71,7 +74,7 @@ function App() {
           alt="chop shop hero"
           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
       </div>
 
       {/* Center */}
@@ -81,10 +84,12 @@ function App() {
             Icon Button
           </h2>
           <p>Used for simple actions with well known icon recognition.</p>
-          <code className="flex p-2 border border-gray-200 rounded bg-gray-900 text-green-400">
-            {`<IconButton theme="${theme}" title="Home">
-          <FiHome />
-        </IconButton>`}
+          <code className={codeBlockStyles}>
+            <pre>
+              {`<IconButton theme="${theme}" title="Home">
+  <FiHome />
+</IconButton>`}
+            </pre>
           </code>
           <div className="p-2">
             <IconButton theme={theme} title="Home">
@@ -97,8 +102,21 @@ function App() {
             Radial Button
           </h2>
           <p>Used for complex actions with multiple options.</p>
-          <code className="flex p-2 border border-gray-200 rounded bg-gray-900 text-green-400">
-            {`<RadialButton label="Center" actions={actions} theme="${theme}" />`}
+          <code className={codeBlockStyles}>
+            <pre>
+              {`const actions = [
+  { label: 'Home', icon: <FiHome />, onClick: () => {} },
+  { label: 'Profile', icon: <FiUser />, onClick: () => {} },
+  { label: 'Settings', icon: <FiSettings />, onClick: () => {} },
+];
+
+<RadialButton 
+  label="Center" 
+  actions={actions} 
+  theme="${theme}" 
+/>
+`}
+            </pre>
           </code>
           <div className="p-2 flex gap-1 justify-between">
             <RadialButton label="Center" actions={actions} theme={theme} />
