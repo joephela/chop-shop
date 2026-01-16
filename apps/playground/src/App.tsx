@@ -41,10 +41,10 @@ function App() {
     <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
       <header className="flex items-center justify-between mb-8">
         <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
-          Chop Shop Playground
+          Playground
         </h1>
 
-        <div className="flex items-center gap-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="flex items-flex-start gap-2 flex-col bg-white dark:bg-gray-800 p-2 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <label
             htmlFor="theme-select"
             className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -91,7 +91,7 @@ function App() {
 </IconButton>`}
             </pre>
           </code>
-          <div className="p-2">
+          <div className="p-2 mt-4">
             <IconButton theme={theme} title="Home">
               <FiHome />
             </IconButton>
@@ -118,7 +118,7 @@ function App() {
 `}
             </pre>
           </code>
-          <div className="p-2 flex gap-1 justify-between">
+          <div className="p-2 flex gap-1 justify-between mt-4">
             <RadialButton label="Center" actions={actions} theme={theme} />
             <RadialButton label="Center" actions={actions} theme={theme} />
             <RadialButton label="Center" actions={actions} theme={theme} />

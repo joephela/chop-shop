@@ -3,6 +3,7 @@ import React, {
   useRef,
   useLayoutEffect,
   type ReactElement,
+  type TouchEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { FiPlus, FiX } from 'react-icons/fi';
@@ -58,6 +59,19 @@ export const RadialButton: React.FC<RadialButtonProps> = ({
   const isInitialMount = useRef(true);
 
   const [activeLabel, setActiveLabel] = useState<string | null>(null);
+
+  const handleTouchMove = (e: TouchEvent<HTMLDivElement>) => {
+    const touch = e.touches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    // Find the closest IconButton (or whatever element has the data-action-label)
+    const button = element?.closest('[data-action-label]');
+
+    if (button) {
+      const label = button.getAttribute('data-action-label');
+      setActiveLabel(label);
+    }
+  };
 
   useLayoutEffect(() => {
     if (expanded && containerRef.current) {
@@ -182,42 +196,48 @@ export const RadialButton: React.FC<RadialButtonProps> = ({
             <FiX size={24} />
           </IconButton>
 
-          {actions.map((action, index) => {
-            const { x, y } = calculateActionPosition(
-              index,
-              actions.length,
-              arc.start,
-              arc.end
-            );
-            const isLast = index === actions.length - 1;
-            const isActive = activeLabel === action.label;
+          <div onTouchMove={handleTouchMove}>
+            {actions.map((action, index) => {
+              const { x, y } = calculateActionPosition(
+                index,
+                actions.length,
+                arc.start,
+                arc.end
+              );
+              const isLast = index === actions.length - 1;
+              const isActive = activeLabel === action.label;
 
-            return (
-              <IconButton
-                ref={isLast ? lastActionRef : null}
-                theme={theme}
-                onClick={() => {
-                  action.onClick();
-                  setExpanded(false);
-                }}
-                onMouseEnter={() => setActiveLabel(action.label)}
-                onMouseLeave={() => setActiveLabel(null)}
-                onFocus={() => setActiveLabel(action.label)}
-                onBlur={() => setActiveLabel(null)}
-                aria-label={action.label}
-                key={action.label}
-                title={action.label}
-                className="absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
-                style={{
-                  transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  {action.icon} {isActive && action.label}
-                </div>
-              </IconButton>
-            );
-          })}
+              return (
+                <IconButton
+                  ref={isLast ? lastActionRef : null}
+                  theme={theme}
+                  onClick={() => {
+                    action.onClick();
+                    setExpanded(false);
+                  }}
+                  onMouseEnter={() => setActiveLabel(action.label)}
+                  onTouchStart={() => setActiveLabel(action.label)}
+                  onTouchEnd={() => setActiveLabel(null)}
+                  onTouchMove={() => setActiveLabel(action.label)}
+                  onMouseLeave={() => setActiveLabel(null)}
+                  onFocus={() => setActiveLabel(action.label)}
+                  onBlur={() => setActiveLabel(null)}
+                  aria-label={action.label}
+                  data-action-label={action.label}
+                  key={action.label}
+                  title={action.label}
+                  className="absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
+                  style={{
+                    transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    {action.icon} {isActive && action.label}
+                  </div>
+                </IconButton>
+              );
+            })}
+          </div>
         </div>
       </div>,
       document.body
