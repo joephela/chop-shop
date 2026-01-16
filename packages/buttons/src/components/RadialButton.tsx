@@ -225,7 +225,7 @@ export const RadialButton: React.FC<RadialButtonProps> = ({
                   data-action-label={action.label}
                   key={action.label}
                   title={action.label}
-                  className="absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
+                  className="user-select-none absolute left-1/2 top-1/2 focus:z-10 hover:z-10 active:z-10"
                   style={{
                     transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
                   }}
