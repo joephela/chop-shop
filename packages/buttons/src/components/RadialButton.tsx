@@ -218,7 +218,6 @@ export const RadialButton: React.FC<RadialButtonProps> = ({
                   onMouseEnter={() => setActiveLabel(action.label)}
                   onTouchStart={() => setActiveLabel(action.label)}
                   onTouchEnd={() => setActiveLabel(null)}
-                  onTouchMove={() => setActiveLabel(action.label)}
                   onMouseLeave={() => setActiveLabel(null)}
                   onFocus={() => setActiveLabel(action.label)}
                   onBlur={() => setActiveLabel(null)}

@@ -39,8 +39,8 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
-      <header className="flex items-center justify-between mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-white">
+      <header className="flex items-center justify-between mb-8 gap-2 flex-wrap">
+        <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 dark:text-white">
           Playground
         </h1>
 
